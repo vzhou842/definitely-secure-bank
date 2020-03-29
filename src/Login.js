@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Login() {
   return (
-    <form action="/login">
+    <form method="POST" action="/login">
       <label htmlFor="username">Username:</label>
       <input type="text" id="username" />
       <br />
