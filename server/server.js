@@ -24,7 +24,7 @@ app.get('/user', (req, res) => {
   const { session } = req.cookies;
   const user = db.getUser(session);
   if (!user) {
-    res.status(400).end();
+    res.status(200).json(null);
   } else {
     res.status(200).json(user);
   }

@@ -1,8 +1,9 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
+  useHistory,
 } from "react-router-dom";
 import Login from './Login';
 import Home from './Home';
@@ -10,19 +11,36 @@ import Home from './Home';
 import './App.css';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const history = useHistory();
+
+  useEffect(() => {
+    fetch('/user').then(response => response.json()).then(user => {
+      setLoading(false);
+      setUser(user);
+
+      if (!user) {
+        history.push("/login");
+      }
+    });
+  }, [history]);
+
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div className="App">
+      <h1>Welcome to example-insecure-site!</h1>
+      {loading && (
+        <p>Loading data...</p>
+      )}
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/">
+          <Home user={user} />
+        </Route>
+      </Switch>
+    </div>
   );
 }
 
