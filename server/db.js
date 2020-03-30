@@ -13,6 +13,7 @@ function handleLogin(username, password) {
   const sessionID = shortid();
 
   users[username] = {
+    username,
     money: 1000,
   };
   sessions[sessionID] = username;
@@ -20,6 +21,11 @@ function handleLogin(username, password) {
   return sessionID;
 }
 
+function getUser(sessionID) {
+  return users[sessions[sessionID]];
+}
+
 module.exports = {
   handleLogin,
+  getUser,
 };
