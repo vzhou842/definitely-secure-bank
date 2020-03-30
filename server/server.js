@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const sessionID = db.handleLogin(username, password);
-  res.status(200).cookie('session', sessionID, { maxAge: ONE_HOUR_MS }).end();
+  res.cookie('session', sessionID, { maxAge: ONE_HOUR_MS }).redirect('/');
 });
 
 app.get('/user', (req, res) => {
