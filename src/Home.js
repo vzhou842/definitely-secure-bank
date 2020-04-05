@@ -49,6 +49,28 @@ export default function Home({ user, setUser }) {
           </div>
         </div>
       )}
+      {
+        user.transfers.length > 0 && (
+          <table>
+            <thead>
+              <tr>
+                <td>Date</td>
+                <td>Amount</td>
+                <td>Description</td>
+              </tr>
+            </thead>
+            <tbody>
+              {user.transfers.map((transfer, i) => (
+                <tr key={i}>
+                  <td>{(new Date(transfer.date)).toLocaleDateString()}</td>
+                  <td>{transfer.amount}</td>
+                  <td>{transfer.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
+      }
     </>
   );
 }
