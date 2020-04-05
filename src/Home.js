@@ -1,14 +1,30 @@
 import React from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import './Home.css';
 
-export default function Home({ user }) {
+export default function Home({ user, setUser }) {
   const [showTransferModal, setShowTransferModal] = useState(false);
+  const formRef = useRef(null);
 
   if (!user) {
     return null;
   }
+
+  const submitForm = e => {
+    e.preventDefault();
+    const data = new URLSearchParams();
+    for (const pair of new FormData(formRef.current)) {
+        data.append(pair[0], pair[1]);
+    }
+    fetch('/transfer', {
+      method: 'post',
+      body: data,
+    }).then(response => response.json()).then(updatedUser => {
+      setUser(updatedUser);
+      setShowTransferModal(false);
+    }).catch(console.error);
+  };
 
   return (
     <>
@@ -21,14 +37,14 @@ export default function Home({ user }) {
         <div className="modal" onClick={setShowTransferModal.bind(this, false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <h3>Make a Transfer</h3>
-            <form>
-              <label for="amount">Amount:</label>
+            <form ref={formRef}>
+              <label htmlFor="amount">Amount:</label>
               <input type="number" name="amount" id="amount" />
               <br />
-              <label for="description">Description:</label>
+              <label htmlFor="description">Description:</label>
               <input type="text" name="description" id="description" />
               <br />
-              <input type="submit" />
+              <input type="submit" onClick={submitForm} />
             </form>
           </div>
         </div>

@@ -20,6 +20,24 @@ app.post('/login', (req, res) => {
   res.cookie('session', sessionID, { maxAge: ONE_HOUR_MS }).redirect('/');
 });
 
+app.post('/transfer', (req, res) => {
+  const { session } = req.cookies;
+  const user = db.getUser(session);
+
+  if (!user) {
+    return res.status(401).end();
+  }
+
+  const { amount, description } = req.body;
+  const intAmount = parseInt(amount);
+  if (!Number.isInteger(intAmount) || description == null || description == '') {
+    return res.status(400).end();
+  }
+
+  const updatedUser = db.makeTransfer(user, intAmount, description);
+  res.status(200).json(updatedUser);
+});
+
 app.get('/user', (req, res) => {
   const { session } = req.cookies;
   const user = db.getUser(session);

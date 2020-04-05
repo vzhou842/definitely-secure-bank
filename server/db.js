@@ -15,6 +15,7 @@ function handleLogin(username, password) {
   users[username] = {
     username,
     money: 1000,
+    transfers: [],
   };
   sessions[sessionID] = username;
 
@@ -25,7 +26,17 @@ function getUser(sessionID) {
   return users[sessions[sessionID]];
 }
 
+// Returns the updated user
+function makeTransfer(user, amount, description) {
+  const { username, transfers } = user;
+  transfers.push({ amount, date: Date.now(), description });
+  user.money += amount;
+
+  return user;
+}
+
 module.exports = {
   handleLogin,
   getUser,
+  makeTransfer,
 };
