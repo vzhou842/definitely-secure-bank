@@ -43,9 +43,21 @@ app.use((req, res, next) => {
   return next();
 });
 
+// THIS IS UNSAFE
+// Don't do state-changing operations on GET requests!
+app.get('/transfer', (req, res) => {
+  const { amount, description } = req.query;
+  return handleTransfer(res, req.user, amount, description);
+});
+
+// This is better
+// Making a transfer should be a POST, not a GET.
 app.post('/transfer', (req, res) => {
-  const { user } = req;
   const { amount, description } = req.body;
+  return handleTransfer(res, req.user, amount, description);
+});
+
+function handleTransfer(res, user, amount, description) {
   const intAmount = parseInt(amount);
   if (!Number.isInteger(intAmount) || description == null || description == '') {
     return res.status(400).end();
@@ -53,7 +65,7 @@ app.post('/transfer', (req, res) => {
 
   const updatedUser = db.makeTransfer(user, intAmount, description);
   res.status(200).json(updatedUser);
-});
+}
 
 const port = process.env.PORT || '8001';
 app.listen(port);
