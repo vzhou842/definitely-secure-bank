@@ -20,24 +20,6 @@ app.post('/login', (req, res) => {
   res.cookie('session', sessionID, { maxAge: ONE_HOUR_MS }).redirect('/');
 });
 
-app.post('/transfer', (req, res) => {
-  const { session } = req.cookies;
-  const user = db.getUser(session);
-
-  if (!user) {
-    return res.status(401).end();
-  }
-
-  const { amount, description } = req.body;
-  const intAmount = parseInt(amount);
-  if (!Number.isInteger(intAmount) || description == null || description == '') {
-    return res.status(400).end();
-  }
-
-  const updatedUser = db.makeTransfer(user, intAmount, description);
-  res.status(200).json(updatedUser);
-});
-
 app.get('/user', (req, res) => {
   const { session } = req.cookies;
   const user = db.getUser(session);
@@ -46,6 +28,31 @@ app.get('/user', (req, res) => {
   } else {
     res.status(200).json(user);
   }
+});
+
+// Auth middleware
+// Everything below this will require auth
+app.use((req, res, next) => {
+  const { session } = req.cookies;
+  const user = db.getUser(session);
+
+  if (!user) {
+    return res.status(401).end();
+  }
+  req.user = user;
+  return next();
+});
+
+app.post('/transfer', (req, res) => {
+  const { user } = req;
+  const { amount, description } = req.body;
+  const intAmount = parseInt(amount);
+  if (!Number.isInteger(intAmount) || description == null || description == '') {
+    return res.status(400).end();
+  }
+
+  const updatedUser = db.makeTransfer(user, intAmount, description);
+  res.status(200).json(updatedUser);
 });
 
 const port = process.env.PORT || '8001';
