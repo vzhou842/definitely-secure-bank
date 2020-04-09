@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>example-insecure-site</h1>
+      <h1>Definitely Secure Bank</h1>
       {loading && (
         <p>Loading data...</p>
       )}
