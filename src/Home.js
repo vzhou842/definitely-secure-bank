@@ -41,6 +41,9 @@ export default function Home({ user, setUser }) {
               <label htmlFor="amount">Amount:</label>
               <input type="number" name="amount" id="amount" />
               <br />
+              <label htmlFor="to">To:</label>
+              <input type="text" name="to" id="to" />
+              <br />
               <label htmlFor="description">Description:</label>
               <input type="text" name="description" id="description" />
               <br />
@@ -56,6 +59,7 @@ export default function Home({ user, setUser }) {
               <tr>
                 <td>Date</td>
                 <td>Amount</td>
+                <td>To</td>
                 <td>Description</td>
               </tr>
             </thead>
@@ -64,6 +68,7 @@ export default function Home({ user, setUser }) {
                 <tr key={i}>
                   <td>{(new Date(transfer.date)).toLocaleDateString()}</td>
                   <td>{transfer.amount}</td>
+                  <td>{transfer.to}</td>
                   <td>{transfer.description}</td>
                 </tr>
               ))}
