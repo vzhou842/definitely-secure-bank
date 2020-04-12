@@ -16,15 +16,24 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    fetch('/user').then(response => response.json()).then(user => {
-      setLoading(false);
-      setUser(user);
+    const refreshUser = () => {
+      return fetch('/user').then(response => response.json()).then(user => {
+        setLoading(false);
+        setUser(user);
 
-      if (!user) {
-        history.push("/login");
-      }
-    });
-  }, [history]);
+        if (!user) {
+          history.push("/login");
+        }
+      });
+    }
+
+    refreshUser();
+    const intervalID = setInterval(refreshUser, 5000);
+
+    return () => {
+      clearInterval(intervalID);
+    }
+  }, [history, setUser, setLoading]);
 
   return (
     <div className="App">
