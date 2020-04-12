@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRef, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 
 export default function Home({ user, setUser }) {
@@ -33,23 +33,49 @@ export default function Home({ user, setUser }) {
 
   return (
     <>
-      <Card>
-        <Card.Header>Account</Card.Header>
-        <Card.Body>
-          <p>
-            Username: <b>{user.username}</b>
-          </p>
-          <p>
-            Account Balance: $<b>{user.money}</b>
-          </p>
-        </Card.Body>
-      </Card>
-      <Card>
-        <Card.Header>Activity</Card.Header>
-        <Card.Body>
-          <button onClick={setShowTransferModal.bind(this, true)}>Make Transfer</button>
-        </Card.Body>
-      </Card>
+      <div className="container">
+        <Card>
+          <Card.Header as="h5">Account</Card.Header>
+          <Card.Body>
+            <Card.Text>
+              Username: <b>{user.username}</b>
+            </Card.Text>
+            <Card.Text>
+              Account Balance: $<b>{user.money}</b>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card>
+          <Card.Header as="h5">Activity</Card.Header>
+          <Card.Body>
+            {user.transfers.length > 0 ? (
+              <table>
+                <thead>
+                  <tr>
+                    <td>Date</td>
+                    <td>Amount</td>
+                    <td>To</td>
+                    <td>Description</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {user.transfers.map((transfer, i) => (
+                    <tr key={i}>
+                      <td>{new Date(transfer.date).toLocaleDateString()}</td>
+                      <td>{transfer.amount}</td>
+                      <td>{transfer.to}</td>
+                      <td>{transfer.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <Card.Text>No transfers made yet.</Card.Text>
+            )}
+            <Button onClick={setShowTransferModal.bind(this, true)}>Make Transfer</Button>
+          </Card.Body>
+        </Card>
+      </div>
       {showTransferModal && (
         <div className="modal" onClick={setShowTransferModal.bind(this, false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -68,28 +94,6 @@ export default function Home({ user, setUser }) {
             </form>
           </div>
         </div>
-      )}
-      {user.transfers.length > 0 && (
-        <table>
-          <thead>
-            <tr>
-              <td>Date</td>
-              <td>Amount</td>
-              <td>To</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            {user.transfers.map((transfer, i) => (
-              <tr key={i}>
-                <td>{new Date(transfer.date).toLocaleDateString()}</td>
-                <td>{transfer.amount}</td>
-                <td>{transfer.to}</td>
-                <td>{transfer.description}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       )}
     </>
   );

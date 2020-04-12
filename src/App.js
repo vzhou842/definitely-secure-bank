@@ -4,6 +4,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
