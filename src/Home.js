@@ -1,6 +1,8 @@
 import React from 'react';
 import { useRef, useState } from 'react';
+import Card from 'react-bootstrap/Card';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 
 export default function Home({ user, setUser }) {
@@ -31,15 +33,23 @@ export default function Home({ user, setUser }) {
 
   return (
     <>
-      <div>
-        <p>
-          Username: <b>{user.username}</b>
-        </p>
-        <p>
-          Account Balance: $<b>{user.money}</b>
-        </p>
-        <button onClick={setShowTransferModal.bind(this, true)}>Make Transfer</button>
-      </div>
+      <Card>
+        <Card.Header>Account</Card.Header>
+        <Card.Body>
+          <p>
+            Username: <b>{user.username}</b>
+          </p>
+          <p>
+            Account Balance: $<b>{user.money}</b>
+          </p>
+        </Card.Body>
+      </Card>
+      <Card>
+        <Card.Header>Activity</Card.Header>
+        <Card.Body>
+          <button onClick={setShowTransferModal.bind(this, true)}>Make Transfer</button>
+        </Card.Body>
+      </Card>
       {showTransferModal && (
         <div className="modal" onClick={setShowTransferModal.bind(this, false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
