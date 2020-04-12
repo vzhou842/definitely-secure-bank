@@ -1,6 +1,16 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
-export default function Login() {
+export default function Login({ user }) {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (user) {
+      history.replace('/');
+    }
+  }, [history, user]);
+
   return (
     <form method="POST" action="/login">
       <label htmlFor="username">Username:</label>

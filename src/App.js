@@ -43,7 +43,7 @@ function App() {
       )}
       <Switch>
         <Route path="/login">
-          <Login />
+          <Login user={user} />
         </Route>
         <Route path="/">
           <Home user={user} setUser={setUser} />
