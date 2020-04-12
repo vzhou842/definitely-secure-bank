@@ -1,10 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import {
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
+import { Switch, Route, useHistory } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
 
@@ -17,30 +13,30 @@ function App() {
 
   useEffect(() => {
     const refreshUser = () => {
-      return fetch('/user').then(response => response.json()).then(user => {
-        setLoading(false);
-        setUser(user);
+      return fetch('/user')
+        .then(response => response.json())
+        .then(user => {
+          setLoading(false);
+          setUser(user);
 
-        if (!user) {
-          history.push("/login");
-        }
-      });
-    }
+          if (!user) {
+            history.push('/login');
+          }
+        });
+    };
 
     refreshUser();
     const intervalID = setInterval(refreshUser, 5000);
 
     return () => {
       clearInterval(intervalID);
-    }
+    };
   }, [history, setUser, setLoading]);
 
   return (
     <div className="App">
       <h1>Definitely Secure Bank</h1>
-      {loading && (
-        <p>Loading data...</p>
-      )}
+      {loading && <p>Loading data...</p>}
       <Switch>
         <Route path="/login">
           <Login user={user} />
