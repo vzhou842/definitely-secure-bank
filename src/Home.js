@@ -2,6 +2,8 @@ import React from 'react';
 import { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 import './Home.css';
 
@@ -76,25 +78,30 @@ export default function Home({ user, setUser }) {
           </Card.Body>
         </Card>
       </div>
-      {showTransferModal && (
-        <div className="modal" onClick={setShowTransferModal.bind(this, false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h3>Make a Transfer</h3>
-            <form ref={formRef}>
-              <label htmlFor="amount">Amount:</label>
-              <input type="number" name="amount" id="amount" />
-              <br />
-              <label htmlFor="to">To:</label>
-              <input type="text" name="to" id="to" />
-              <br />
-              <label htmlFor="description">Description:</label>
-              <input type="text" name="description" id="description" />
-              <br />
-              <input type="submit" onClick={submitForm} />
-            </form>
-          </div>
-        </div>
-      )}
+      <Modal show={showTransferModal} onHide={setShowTransferModal.bind(this, false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Make a Transfer</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form ref={formRef}>
+            <Form.Group>
+              <Form.Label>Amount:</Form.Label>
+              <Form.Control type="number" name="amount" />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>To:</Form.Label>
+              <Form.Control type="text" name="to" />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Description:</Form.Label>
+              <Form.Control type="text" name="description" />
+            </Form.Group>
+            <Button type="submit" onClick={submitForm}>
+              Submit
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }

@@ -7,24 +7,6 @@
   margin: 10px;
 }
 
-.modal {
-  background-color: rgba(0, 0, 0, 0.25);
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  border-radius: 5px;
-  padding: 20px;
-}
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
