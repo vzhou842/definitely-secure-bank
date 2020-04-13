@@ -75,7 +75,7 @@ function handleTransfer(res, user, data) {
     return res.status(400).end();
   }
 
-  const updatedUser = db.makeTransfer(user, intAmount, to, description, intDate);
+  const updatedUser = db.makeTransfer(user, floatAmount, to, description, intDate);
   res.status(200).json(updatedUser);
 }
 
