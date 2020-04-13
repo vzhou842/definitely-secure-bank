@@ -5,8 +5,14 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
+import TimeAgo from 'javascript-time-ago';
+
+import en from 'javascript-time-ago/locale/en';
 
 import './Home.css';
+
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo('en-US');
 
 export default function Home({ user, setUser }) {
   const [showTransferModal, setShowTransferModal] = useState(false);
@@ -65,7 +71,7 @@ export default function Home({ user, setUser }) {
                 <tbody>
                   {user.transfers.map((transfer, i) => (
                     <tr key={i}>
-                      <td>{new Date(transfer.date).toLocaleDateString()}</td>
+                      <td>{timeAgo.format(transfer.date)}</td>
                       <td>{transfer.amount}</td>
                       <td>{transfer.to}</td>
                       <td>{transfer.description}</td>
