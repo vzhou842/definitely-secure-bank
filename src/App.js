@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
+import Spinner from 'react-bootstrap/Spinner';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -37,7 +38,11 @@ function App() {
   return (
     <div className="App">
       <h1>Definitely Secure Bank</h1>
-      {loading && <p>Loading data...</p>}
+      {loading && (
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      )}
       <Switch>
         <Route path="/login">
           <Login user={user} />
