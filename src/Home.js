@@ -47,10 +47,10 @@ export default function Home({ user, setUser }) {
           <Card.Header as="h5">Account</Card.Header>
           <Card.Body>
             <Card.Text>
-              Username: <b>{user.username}</b>
+              Welcome back, <b>{user.username}</b>!
             </Card.Text>
             <Card.Text>
-              Account Balance: $<b>{user.money}</b>
+              Your balance is: <b>${user.money}</b>
             </Card.Text>
           </Card.Body>
         </Card>
