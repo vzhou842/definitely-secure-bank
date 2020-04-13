@@ -33,11 +33,18 @@ export default function TransferModal({ formRef, show, onHide, submitForm }) {
               name="amount"
               value={amount}
               onChange={onChangeFactory(setAmount)}
+              placeholder="0.00"
             />
           </Form.Group>
           <Form.Group>
             <Form.Label>To:</Form.Label>
-            <Form.Control type="text" name="to" value={to} onChange={onChangeFactory(setTo)} />
+            <Form.Control
+              type="text"
+              name="to"
+              value={to}
+              onChange={onChangeFactory(setTo)}
+              placeholder="Name"
+            />
           </Form.Group>
           <Form.Group>
             <Form.Label>Description:</Form.Label>
@@ -46,6 +53,7 @@ export default function TransferModal({ formRef, show, onHide, submitForm }) {
               name="description"
               value={description}
               onChange={onChangeFactory(setDescription)}
+              placeholder="What is this transfer for?"
             />
           </Form.Group>
           <Button type="submit" onClick={submitForm} disabled={!submittable}>
