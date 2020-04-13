@@ -2,10 +2,9 @@ import React from 'react';
 import { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import TimeAgo from 'javascript-time-ago';
+import TransferModal from './TransferModal';
 
 import en from 'javascript-time-ago/locale/en';
 
@@ -88,30 +87,12 @@ export default function Home({ user, setUser }) {
           </Card.Body>
         </Card>
       </div>
-      <Modal show={showTransferModal} onHide={setShowTransferModal.bind(this, false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Make a Transfer</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form ref={formRef}>
-            <Form.Group>
-              <Form.Label>Amount:</Form.Label>
-              <Form.Control type="number" name="amount" />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>To:</Form.Label>
-              <Form.Control type="text" name="to" />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Description:</Form.Label>
-              <Form.Control type="text" name="description" />
-            </Form.Group>
-            <Button type="submit" onClick={submitForm}>
-              Submit
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
+      <TransferModal
+        show={showTransferModal}
+        onHide={setShowTransferModal.bind(this, false)}
+        formRef={formRef}
+        submitForm={submitForm}
+      />
     </>
   );
 }
