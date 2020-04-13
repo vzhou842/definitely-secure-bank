@@ -6,6 +6,7 @@ const db = require('./db');
 const BUILD_PATH = path.join(__dirname, '../build');
 
 const ONE_HOUR_MS = 1000 * 60 * 60;
+const ONE_WEEK_MS = 1000 * 60 * 60 * 24 * 7;
 
 const app = express();
 
@@ -56,19 +57,21 @@ app.post('/transfer', (req, res) => {
 });
 
 function handleTransfer(res, user, data) {
-  const { amount, description, to } = data;
+  const { amount, description, to, date } = data;
   const intAmount = parseInt(amount);
+  const intDate = parseInt(date);
   if (
     !Number.isInteger(intAmount) ||
     description == null ||
     description == '' ||
     to == null ||
-    to == ''
+    to == '' ||
+    intDate < Date.now() - ONE_WEEK_MS
   ) {
     return res.status(400).end();
   }
 
-  const updatedUser = db.makeTransfer(user, intAmount, to, description);
+  const updatedUser = db.makeTransfer(user, intAmount, to, description, intDate);
   res.status(200).json(updatedUser);
 }
 
