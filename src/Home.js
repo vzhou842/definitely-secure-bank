@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import Table from 'react-bootstrap/Table';
 
 import './Home.css';
 
@@ -51,7 +52,7 @@ export default function Home({ user, setUser }) {
           <Card.Header as="h5">Activity</Card.Header>
           <Card.Body>
             {user.transfers.length > 0 ? (
-              <table>
+              <Table responsive hover>
                 <thead>
                   <tr>
                     <td>Date</td>
@@ -70,7 +71,7 @@ export default function Home({ user, setUser }) {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </Table>
             ) : (
               <Card.Text>No transfers made yet.</Card.Text>
             )}
