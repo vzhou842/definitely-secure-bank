@@ -58,10 +58,11 @@ app.post('/transfer', (req, res) => {
 
 function handleTransfer(res, user, data) {
   const { amount, description, to, date } = data;
-  const intAmount = parseInt(amount);
+  const floatAmount = parseFloat(amount);
   const intDate = parseInt(date);
   if (
-    !Number.isInteger(intAmount) ||
+    floatAmount == NaN ||
+    floatAmount <= 0 ||
     description == null ||
     description == '' ||
     to == null ||
