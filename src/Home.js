@@ -69,15 +69,18 @@ export default function Home({ user, setUser }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {user.transfers.map((transfer, i) => (
-                    <tr key={i}>
-                      <td>{timeAgo.format(transfer.date)}</td>
-                      <td>{-transfer.amount}</td>
-                      <td>{transfer.to}</td>
-                      <td>{transfer.description}</td>
-                      <td>${transfer.balance}</td>
-                    </tr>
-                  ))}
+                  {user.transfers
+                    .slice(0)
+                    .reverse()
+                    .map((transfer, i) => (
+                      <tr key={i}>
+                        <td>{timeAgo.format(transfer.date)}</td>
+                        <td>{-transfer.amount}</td>
+                        <td>{transfer.to}</td>
+                        <td>{transfer.description}</td>
+                        <td>${transfer.balance}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </Table>
             ) : (
