@@ -17,6 +17,9 @@ app.use(cookieParser());
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
+  if (username == null || password == null || username.length < 3 || password.length < 1) {
+    return res.status(400).end();
+  }
   const sessionID = db.handleLogin(username, password);
   res.cookie('session', sessionID, { maxAge: ONE_HOUR_MS }).redirect('/');
 });
