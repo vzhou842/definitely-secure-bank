@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
-  if (username == null || password == null || username.length < 3 || password.length < 1) {
+  if (username == null || password == null || username.length < 1 || password.length < 1) {
     return res.status(400).end();
   }
   const sessionID = db.handleLogin(username, password);
@@ -64,7 +64,7 @@ function handleTransfer(res, user, data) {
   const floatAmount = parseFloat(amount);
   const intDate = parseInt(date);
   if (
-    floatAmount == NaN ||
+    isNaN(floatAmount) ||
     floatAmount <= 0 ||
     description == null ||
     description == '' ||

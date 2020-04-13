@@ -18,7 +18,7 @@ export default function TransferModal({ formRef, show, onHide, submitForm, loadi
 
   const floatAmount = parseFloat(amount);
   const submittable =
-    floatAmount != NaN && floatAmount > 0 && to.length > 0 && description.length > 0;
+    !isNaN(floatAmount) && floatAmount > 0 && to.length > 0 && description.length > 0;
 
   return (
     <Modal show={show} onHide={onHide}>

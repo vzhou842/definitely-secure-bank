@@ -43,7 +43,7 @@ export default function Login({ user }) {
           placeholder="Password"
         />
       </Form.Group>
-      <Button type="submit" disabled={username.length < 3 || password.length < 1}>
+      <Button type="submit" disabled={username.length < 1 || password.length < 1}>
         Submit
       </Button>
     </Form>
