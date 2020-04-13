@@ -14,6 +14,7 @@ TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 export default function Home({ user, setUser }) {
+  const [transferModalLoading, setTransferModalLoading] = useState(false);
   const [showTransferModal, setShowTransferModal] = useState(false);
   const formRef = useRef(null);
 
@@ -23,6 +24,8 @@ export default function Home({ user, setUser }) {
 
   const submitForm = e => {
     e.preventDefault();
+    setTransferModalLoading(true);
+
     const data = new URLSearchParams();
     for (const pair of new FormData(formRef.current)) {
       data.append(pair[0], pair[1]);
@@ -36,8 +39,12 @@ export default function Home({ user, setUser }) {
       .then(updatedUser => {
         setUser(updatedUser);
         setShowTransferModal(false);
+        setTransferModalLoading(false);
       })
-      .catch(console.error);
+      .catch(e => {
+        console.error(e);
+        setTransferModalLoading(false);
+      });
   };
 
   return (
@@ -95,6 +102,7 @@ export default function Home({ user, setUser }) {
         onHide={setShowTransferModal.bind(this, false)}
         formRef={formRef}
         submitForm={submitForm}
+        loading={transferModalLoading}
       />
     </>
   );

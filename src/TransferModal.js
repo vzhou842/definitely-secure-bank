@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import Spinner from 'react-bootstrap/Spinner';
 
 const onChangeFactory = setter => {
   return e => {
@@ -10,7 +11,7 @@ const onChangeFactory = setter => {
   };
 };
 
-export default function TransferModal({ formRef, show, onHide, submitForm }) {
+export default function TransferModal({ formRef, show, onHide, submitForm, loading }) {
   const [amount, setAmount] = useState('');
   const [to, setTo] = useState('');
   const [description, setDescription] = useState('');
@@ -56,8 +57,12 @@ export default function TransferModal({ formRef, show, onHide, submitForm }) {
               placeholder="What is this transfer for?"
             />
           </Form.Group>
-          <Button type="submit" onClick={submitForm} disabled={!submittable}>
-            Submit
+          <Button type="submit" onClick={submitForm} disabled={loading || !submittable}>
+            {loading ? (
+              <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+            ) : (
+              'Submit'
+            )}
           </Button>
         </Form>
       </Modal.Body>
