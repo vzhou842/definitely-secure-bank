@@ -1,6 +1,7 @@
 .container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -20,4 +21,8 @@ input[type=number] {
 
 thead {
   font-weight: bold;
+}
+
+td {
+  text-align: center;
 }
