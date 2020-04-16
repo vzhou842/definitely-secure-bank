@@ -61,7 +61,7 @@ export default function TransferModal({ formRef, show, onHide, submitForm, loadi
             {loading ? (
               <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
             ) : (
-              'Submit'
+              'Submit Transfer'
             )}
           </Button>
         </Form>
