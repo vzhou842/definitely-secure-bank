@@ -52,20 +52,19 @@ app.use((req, res, next) => {
 app.post('/transfer', (req, res) => {
   const { amount, description, to, date } = req.body;
   const floatAmount = parseFloat(amount);
-  const intDate = parseInt(date);
+
   if (
     isNaN(floatAmount) ||
     floatAmount <= 0 ||
     description == null ||
     description == '' ||
     to == null ||
-    to == '' ||
-    intDate < Date.now() - ONE_WEEK_MS
+    to == ''
   ) {
     return res.status(400).end();
   }
 
-  const updatedUser = db.makeTransfer(req.user, floatAmount, to, description, intDate);
+  const updatedUser = db.makeTransfer(req.user, floatAmount, to, description);
   res.status(200).json(updatedUser);
 });
 

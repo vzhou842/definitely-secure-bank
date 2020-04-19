@@ -27,10 +27,10 @@ function getUser(sessionID) {
 }
 
 // Returns the updated user
-function makeTransfer(user, amount, to, description, date) {
+function makeTransfer(user, amount, to, description) {
   const { username, transfers } = user;
   user.money -= amount;
-  transfers.push({ amount, date, description, to, balance: user.money });
+  transfers.push({ amount, date: Date.now(), description, to, balance: user.money });
 
   return user;
 }

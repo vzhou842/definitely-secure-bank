@@ -30,7 +30,7 @@ export default function Home({ user, setUser }) {
     for (const pair of new FormData(formRef.current)) {
       data.append(pair[0], pair[1]);
     }
-    data.append('date', Date.now());
+
     fetch('/transfer', {
       method: 'post',
       body: data,
