@@ -1,6 +1,6 @@
 {
-  "short_name": "Example Insecure Site",
-  "name": "Example Insecure Site",
+  "short_name": "Definitely Secure Bank",
+  "name": "Definitely Secure Bank",
   "icons": [
     {
       "src": "favicon.ico",
