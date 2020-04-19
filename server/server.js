@@ -47,20 +47,10 @@ app.use((req, res, next) => {
   return next();
 });
 
-// THIS IS UNSAFE
-// Don't do state-changing operations on GET requests!
-app.get('/transfer', (req, res) => {
-  return handleTransfer(res, req.user, req.query);
-});
-
 // This is better
 // Making a transfer should be a POST, not a GET.
 app.post('/transfer', (req, res) => {
-  return handleTransfer(res, req.user, req.body);
-});
-
-function handleTransfer(res, user, data) {
-  const { amount, description, to, date } = data;
+  const { amount, description, to, date } = req.body;
   const floatAmount = parseFloat(amount);
   const intDate = parseInt(date);
   if (
@@ -75,9 +65,9 @@ function handleTransfer(res, user, data) {
     return res.status(400).end();
   }
 
-  const updatedUser = db.makeTransfer(user, floatAmount, to, description, intDate);
+  const updatedUser = db.makeTransfer(req.user, floatAmount, to, description, intDate);
   res.status(200).json(updatedUser);
-}
+});
 
 const port = process.env.PORT || '8001';
 app.listen(port);
