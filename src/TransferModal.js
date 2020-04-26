@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -11,7 +12,7 @@ const onChangeFactory = setter => {
   };
 };
 
-export default function TransferModal({ formRef, show, onHide, submitForm, loading }) {
+export default function TransferModal({ error, formRef, show, onHide, submitForm, loading }) {
   const [amount, setAmount] = useState('');
   const [to, setTo] = useState('');
   const [description, setDescription] = useState('');
@@ -57,13 +58,16 @@ export default function TransferModal({ formRef, show, onHide, submitForm, loadi
               placeholder="What is this transfer for?"
             />
           </Form.Group>
-          <Button type="submit" onClick={submitForm} disabled={loading || !submittable}>
-            {loading ? (
-              <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-            ) : (
-              'Submit Transfer'
-            )}
-          </Button>
+          <Form.Group>
+            <Button type="submit" onClick={submitForm} disabled={loading || !submittable}>
+              {loading ? (
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+              ) : (
+                'Submit Transfer'
+              )}
+            </Button>
+          </Form.Group>
+          {error && <Alert variant="danger">{error}</Alert>}
         </Form>
       </Modal.Body>
     </Modal>

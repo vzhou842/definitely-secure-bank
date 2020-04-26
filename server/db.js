@@ -26,8 +26,11 @@ function getUser(sessionID) {
   return users[sessions[sessionID]];
 }
 
-// Returns the updated user
+// Returns the updated user, or false on failure.
 function makeTransfer(user, amount, to, description) {
+  if (user.money < amount) {
+    return false;
+  }
   const { username, transfers } = user;
   user.money -= amount;
   transfers.push({ amount, date: Date.now(), description, to, balance: user.money });

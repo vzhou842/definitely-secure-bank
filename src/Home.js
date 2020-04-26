@@ -16,6 +16,7 @@ const timeAgo = new TimeAgo('en-US');
 export default function Home({ user, setUser }) {
   const [transferModalLoading, setTransferModalLoading] = useState(false);
   const [showTransferModal, setShowTransferModal] = useState(false);
+  const [transferError, setTransferError] = useState(null);
   const formRef = useRef(null);
 
   if (!user) {
@@ -36,13 +37,19 @@ export default function Home({ user, setUser }) {
       body: data,
     })
       .then(response => response.json())
-      .then(updatedUser => {
-        setUser(updatedUser);
-        setShowTransferModal(false);
+      .then(response => {
+        if (response.success) {
+          const updatedUser = response.user;
+          setUser(updatedUser);
+          setShowTransferModal(false);
+        } else {
+          setTransferError(response.error);
+        }
+
         setTransferModalLoading(false);
       })
       .catch(e => {
-        console.error(e);
+        setTransferError('An unknown error occurred.');
         setTransferModalLoading(false);
       });
   };
@@ -98,6 +105,7 @@ export default function Home({ user, setUser }) {
         </Card>
       </div>
       <TransferModal
+        error={transferError}
         show={showTransferModal}
         onHide={setShowTransferModal.bind(this, false)}
         formRef={formRef}

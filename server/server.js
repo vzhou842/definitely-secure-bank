@@ -55,8 +55,6 @@ app.use((req, res, next) => {
   return next();
 });
 
-// This is better
-// Making a transfer should be a POST, not a GET.
 app.post('/transfer', (req, res) => {
   const { amount, description, to, date } = req.body;
   const floatAmount = parseFloat(amount);
@@ -73,7 +71,10 @@ app.post('/transfer', (req, res) => {
   }
 
   const updatedUser = db.makeTransfer(req.user, floatAmount, to, description);
-  res.status(200).json(updatedUser);
+  if (updatedUser === false) {
+    return res.status(401).json({ error: "You don't have enough balance.", success: false });
+  }
+  res.status(200).json({ user: updatedUser, success: true });
 });
 
 const port = process.env.PORT || '8001';
