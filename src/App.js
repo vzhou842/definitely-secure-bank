@@ -52,8 +52,24 @@ function App() {
         </Route>
       </Switch>
       <div className="footer">
-        <p>Built by <a href="https://victorzhou.com" target="_blank">Victor Zhou</a> for demo purposes.</p>
-        <p>See the source code on <a href="https://github.com/vzhou842/definitely-secure-bank" target="_blank" rel="noopener noreferrer">Github</a>.</p>
+        <p>
+          Built by{' '}
+          <a href="https://victorzhou.com" target="_blank">
+            Victor Zhou
+          </a>{' '}
+          for demo purposes.
+        </p>
+        <p>
+          See the source code on{' '}
+          <a
+            href="https://github.com/vzhou842/definitely-secure-bank"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github
+          </a>
+          .
+        </p>
       </div>
     </div>
   );
