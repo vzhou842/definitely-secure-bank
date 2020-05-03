@@ -9,7 +9,7 @@
 }
 
 .header {
-  margin-bottom: 25px;
+  margin: 25px 0;
   text-align: center;
 }
 
@@ -22,7 +22,7 @@
   min-width: 250px;
   max-width: 400px;
   padding-top: 25px;
-  margin-top: 5vh;
+  margin-top: 10vh;
   border-top: 1px solid #ddd;
 }
 
