@@ -37,7 +37,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Definitely Secure Bank</h1>
+      <div className="header">
+        <img src="/dsb.svg" width={48} height={48} />
+        <h1>Definitely Secure Bank</h1>
+      </div>
       {loading && (
         <Spinner animation="border" role="status">
           <span className="sr-only">Loading...</span>
