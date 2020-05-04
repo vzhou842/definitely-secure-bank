@@ -27,8 +27,13 @@ export default function Home({ user, setUser }) {
     e.preventDefault();
     setTransferModalLoading(true);
 
+    // The fields in this form (found in TransferModal.js) are:
+    //   - amount
+    //   - to
+    //   - description
     const data = new URLSearchParams();
     for (const pair of new FormData(formRef.current)) {
+      // pair[0] is the field name, pair[1] is the field value
       data.append(pair[0], pair[1]);
     }
 
