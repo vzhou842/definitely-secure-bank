@@ -3,15 +3,9 @@ import { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
-import TimeAgo from 'javascript-time-ago';
 import TransferModal from './TransferModal';
 
-import en from 'javascript-time-ago/locale/en';
-
 import './Home.css';
-
-TimeAgo.addLocale(en);
-const timeAgo = new TimeAgo('en-US');
 
 export default function Home({ user, setUser }) {
   const [transferModalLoading, setTransferModalLoading] = useState(false);
@@ -80,7 +74,6 @@ export default function Home({ user, setUser }) {
               <Table responsive hover>
                 <thead>
                   <tr>
-                    <td>Date</td>
                     <td>Amount</td>
                     <td>To</td>
                     <td>Description</td>
@@ -93,7 +86,6 @@ export default function Home({ user, setUser }) {
                     .reverse()
                     .map((transfer, i) => (
                       <tr key={i}>
-                        <td>{timeAgo.format(transfer.date)}</td>
                         <td>{-transfer.amount}</td>
                         <td>{transfer.to}</td>
                         <td>{transfer.description}</td>

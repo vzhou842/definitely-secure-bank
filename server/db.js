@@ -33,7 +33,7 @@ function makeTransfer(user, amount, to, description) {
   }
   const { username, transfers } = user;
   user.money -= amount;
-  transfers.push({ amount, date: Date.now(), description, to, balance: user.money });
+  transfers.push({ amount, description, to, balance: user.money });
 
   return user;
 }
