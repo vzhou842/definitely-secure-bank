@@ -38,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-        <img src="/dsb.svg" width={48} height={48} />
+        <img alt="The DSB logo" src="/dsb.svg" width={48} height={48} />
         <h1>Definitely Secure Bank</h1>
       </div>
       {loading && (
