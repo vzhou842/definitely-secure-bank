@@ -39,15 +39,17 @@ app.post('/login', (req, res) => {
     return res.status(400).end();
   }
   const sessionID = db.handleLogin(username, password);
-  res.cookie('session', sessionID, {
-    maxAge: ONE_HOUR_MS,
-    // This is an example of what not to do. This absolutely should
-    // NOT be set to 'None' for a session cookie.
-    sameSite: 'None',
-    // Look! "secure" is true, so we're good right? NO.
-    // This just says "only include this cookie on HTTPS requests"
-    secure: true,
-  }).redirect('/');
+  res
+    .cookie('session', sessionID, {
+      maxAge: ONE_HOUR_MS,
+      // This is an example of what not to do. This absolutely should
+      // NOT be set to 'None' for a session cookie.
+      sameSite: 'None',
+      // Look! "secure" is true, so we're good right? NO.
+      // This just says "only include this cookie on HTTPS requests"
+      secure: true,
+    })
+    .redirect('/');
 });
 
 // Auth middleware
