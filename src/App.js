@@ -56,14 +56,7 @@ function App() {
       </Switch>
       <div className="footer">
         <p>
-          Built by{' '}
-          <a href="https://victorzhou.com" target="_blank">
-            Victor Zhou
-          </a>{' '}
-          for demo purposes.
-        </p>
-        <p>
-          See the source code on{' '}
+          Source code available on{' '}
           <a
             href="https://github.com/vzhou842/definitely-secure-bank"
             target="_blank"
@@ -72,6 +65,19 @@ function App() {
             Github
           </a>
           .
+        </p>
+        <p>
+          Built by{' '}
+          <a href="https://victorzhou.com" target="_blank">
+            Victor Zhou
+          </a>{' '}
+          for demo purposes.
+        </p>
+        <p>
+          See:{' '}
+          <b>
+            <a href="https://victorzhou.com/blog/csrf/">CSRF Demo</a>
+          </b>
         </p>
       </div>
     </div>
