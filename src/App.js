@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
+import Search from './Search';
 import Spinner from 'react-bootstrap/Spinner';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -49,6 +50,9 @@ function App() {
       <Switch>
         <Route path="/login">
           <Login user={user} />
+        </Route>
+        <Route path="/search">
+          <Search />
         </Route>
         <Route path="/">
           <Home user={user} setUser={setUser} />
