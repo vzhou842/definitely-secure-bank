@@ -1,0 +1,30 @@
+.search-container {
+  margin-top: 50px;
+}
+
+.search-submit-button {
+  max-width: 160px;
+  margin: 0 auto;
+}
+
+#searchbar {
+  width: 250px;
+}
+
+@media only screen and (min-width: 600px) {
+  #searchbar {
+    width: 400px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #searchbar {
+    width: 600px;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  #searchbar {
+    width: 800px;
+  }
+}
