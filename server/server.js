@@ -10,6 +10,9 @@ const ONE_WEEK_MS = 1000 * 60 * 60 * 24 * 7;
 
 const app = express();
 
+const IS_PROD = process.env.NODE_ENV !== 'development';
+console.log('Starting for production:', IS_PROD);
+
 app.use(express.static(BUILD_PATH));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -47,7 +50,7 @@ app.post('/login', (req, res) => {
       sameSite: 'None',
       // Look! "secure" is true, so we're good right? NO.
       // This just says "only include this cookie on HTTPS requests"
-      secure: true,
+      secure: IS_PROD,
     })
     .redirect('/');
 });

@@ -20,7 +20,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "format": "prettier --write --ignore-path .gitignore '**/**.js'",
-    "start-server": "node server/server.js",
+    "start-server": "NODE_ENV=development node server/server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
