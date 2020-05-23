@@ -28,3 +28,12 @@
     width: 800px;
   }
 }
+
+.search-query-name {
+  font-weight: bold;
+}
+
+.search-result {
+  margin-top: 30px;
+  text-align: center;
+}
