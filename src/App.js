@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { Link, Switch, Route, useHistory } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
 import Search from './Search';
@@ -39,7 +39,9 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-        <img alt="The DSB logo" src="/dsb.svg" width={48} height={48} />
+        <Link to="/">
+          <img alt="The DSB logo" src="/dsb.svg" width={48} height={48} />
+        </Link>
         <h1>Definitely Secure Bank</h1>
       </div>
       {loading && (
