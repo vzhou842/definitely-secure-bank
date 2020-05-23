@@ -1,16 +1,22 @@
 import React from 'react';
 import { useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import './Search.css';
 
 export default function Search() {
-  const [query, setQuery] = useState('');
+  const [searchText, setSearchText] = useState('');
+  const history = useHistory();
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const query = queryParams.get('q');
 
   const onSubmit = e => {
     e.preventDefault();
-    window.location = `/search?q=${encodeURIComponent(query)}`;
+    history.push(`/search?q=${encodeURIComponent(searchText)}`);
   };
 
   return (
@@ -22,8 +28,8 @@ export default function Search() {
             type="text"
             placeholder="Search something..."
             size="lg"
-            value={query}
-            onChange={e => setQuery(e.target.value)}
+            value={searchText}
+            onChange={e => setSearchText(e.target.value)}
           />
         </Form.Group>
         <Button
