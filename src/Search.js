@@ -44,7 +44,8 @@ export default function Search() {
         </Button>
       </Form>
       <p className="search-result">
-        Unfortunately, no results were found for <span className="search-query-name" dangerouslySetInnerHTML={{ __html: query}} />.
+        Unfortunately, no results were found for{' '}
+        <span className="search-query-name" dangerouslySetInnerHTML={{ __html: query }} />.
       </p>
     </div>
   );
