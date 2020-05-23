@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
@@ -101,6 +102,9 @@ export default function Home({ user, setUser }) {
           </Card.Body>
         </Card>
       </div>
+      <p>
+        Have a question? <Link to="/search">Try searching for the answer</Link>.
+      </p>
       <TransferModal
         error={transferError}
         show={showTransferModal}
