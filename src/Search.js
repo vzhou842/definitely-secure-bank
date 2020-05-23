@@ -28,7 +28,7 @@ export default function Search() {
             type="text"
             placeholder="Search something..."
             size="lg"
-            value={searchText}
+            value={searchText || query}
             onChange={e => setSearchText(e.target.value)}
           />
         </Form.Group>
