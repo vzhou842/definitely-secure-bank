@@ -1,5 +1,10 @@
 .search-container {
   margin-top: 50px;
+  text-align: center;
+}
+
+.search-container form {
+  margin-bottom: 20px;
 }
 
 .search-submit-button {
@@ -31,9 +36,4 @@
 
 .search-query-name {
   font-weight: bold;
-}
-
-.search-result {
-  margin-top: 30px;
-  text-align: center;
 }
