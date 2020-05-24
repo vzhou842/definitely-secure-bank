@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -44,11 +44,14 @@ export default function Search() {
         </Button>
       </Form>
       {!!query && (
-        <p className="search-result">
+        <p>
           Unfortunately, no results were found for{' '}
           <span className="search-query-name" dangerouslySetInnerHTML={{ __html: query }} />.
         </p>
       )}
+      <p>
+        <Link to="/">Back to homepage</Link>
+      </p>
     </div>
   );
 }
