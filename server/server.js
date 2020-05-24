@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get('/login', (req, res) => {
+app.get(['/login', '/search'], (req, res) => {
   res.sendFile(path.join(BUILD_PATH, 'index.html'));
 });
 
