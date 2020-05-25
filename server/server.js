@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const db = require('./db');
+const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
 
 const BUILD_PATH = path.join(__dirname, '../build');
 
@@ -12,6 +13,9 @@ const app = express();
 
 const IS_PROD = process.env.NODE_ENV !== 'development';
 console.log('Starting for production:', IS_PROD);
+
+// Redirect http to https, except on localhost
+app.use(redirectToHTTPS([/localhost:(\d{4})/], 301));
 
 app.use(express.static(BUILD_PATH));
 app.use(express.json());
