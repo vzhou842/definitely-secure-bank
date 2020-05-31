@@ -52,22 +52,23 @@ function App() {
         </Link>
         <h1>Definitely Secure Bank</h1>
       </div>
-      {loading && (
+      {loading ? (
         <Spinner animation="border" role="status">
           <span className="sr-only">Loading...</span>
         </Spinner>
+      ) : (
+        <Switch>
+          <Route path="/login">
+            <Login user={user} />
+          </Route>
+          <Route path="/search">
+            <Search />
+          </Route>
+          <Route path="/">
+            <Home user={user} setUser={setUser} />
+          </Route>
+        </Switch>
       )}
-      <Switch>
-        <Route path="/login">
-          <Login user={user} />
-        </Route>
-        <Route path="/search">
-          <Search />
-        </Route>
-        <Route path="/">
-          <Home user={user} setUser={setUser} />
-        </Route>
-      </Switch>
       <div className="footer">
         <p>
           Source code available on{' '}
