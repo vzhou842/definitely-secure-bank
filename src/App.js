@@ -1,6 +1,6 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { Link, Switch, Route, useHistory } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import { Link, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
 import Search from './Search';
@@ -12,29 +12,37 @@ import './App.css';
 function App() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [doneFirstLoad, setDoneFirstLoad] = useState(false);
   const history = useHistory();
+  const location = useLocation();
+
+  const refreshUser = useCallback(() => {
+    return fetch('/user')
+      .then(response => response.json())
+      .then(user => {
+        setLoading(false);
+        setUser(user);
+
+        if (!user) {
+          history.push('/login');
+        }
+      });
+  }, [history, setUser, setLoading]);
 
   useEffect(() => {
-    const refreshUser = () => {
-      return fetch('/user')
-        .then(response => response.json())
-        .then(user => {
-          setLoading(false);
-          setUser(user);
-
-          if (!user) {
-            history.push('/login');
-          }
-        });
-    };
-
-    refreshUser();
     const intervalID = setInterval(refreshUser, 5000);
 
     return () => {
       clearInterval(intervalID);
     };
-  }, [history, setUser, setLoading]);
+  }, [refreshUser]);
+
+  useEffect(() => {
+    if (!doneFirstLoad || location.pathname === '/') {
+      refreshUser();
+      setDoneFirstLoad(true);
+    }
+  }, [location.pathname, refreshUser]);
 
   return (
     <div className="App">
