@@ -6,3 +6,4 @@ A definitely (read: not) secure online banking site. Built by [Victor Zhou](http
 
 Used in:
 - [Web Security 101: An Interactive CSRF Demo](https://victorzhou.com/blog/csrf/)
+- [Web Security 101: Cross-Site Scripting Attacks](https://victorzhou.com/blog/xss/)
