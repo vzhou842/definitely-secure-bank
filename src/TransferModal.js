@@ -70,11 +70,11 @@ export default function TransferModal({ error, formRef, show, onHide, submitForm
           {error && <Alert variant="danger">{error}</Alert>}
           <Alert variant="warning">
             This form is vulnerable to{' '}
-            <Alert.Link target="_blank" href="https://victorzhou.com/blog/csrf">
+            <Alert.Link target="_blank" href="https://victorzhou.com/blog/csrf/">
               CSRF attacks
             </Alert.Link>
             ! Click to{' '}
-            <Alert.Link target="_blank" href="https://victorzhou.com/blog/csrf">
+            <Alert.Link target="_blank" href="https://victorzhou.com/blog/csrf/">
               learn why
             </Alert.Link>
             .

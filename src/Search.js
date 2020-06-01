@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -52,6 +53,17 @@ export default function Search() {
       <p>
         <Link to="/">Back to homepage</Link>
       </p>
+      <Alert variant="warning">
+        This page is vulnerable to{' '}
+        <Alert.Link target="_blank" href="https://victorzhou.com/blog/xss/">
+          XSS attacks
+        </Alert.Link>
+        ! Click to{' '}
+        <Alert.Link target="_blank" href="https://victorzhou.com/blog/xss/">
+          learn why
+        </Alert.Link>
+        .
+      </Alert>
     </div>
   );
 }

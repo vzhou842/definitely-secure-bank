@@ -93,6 +93,10 @@ function App() {
           <b>
             <a href="https://victorzhou.com/blog/csrf/">CSRF Demo</a>
           </b>
+          {' | '}
+          <b>
+            <a href="https://victorzhou.com/blog/xss/">XSS Demo</a>
+          </b>
         </p>
       </div>
     </div>
