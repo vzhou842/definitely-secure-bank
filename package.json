@@ -8,12 +8,12 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.4.1",
     "cookie-parser": "^1.4.5",
-    "express": "^4.17.1",
+    "express": "^4.22.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "shortid": "^2.2.15"
   },
   "scripts": {
